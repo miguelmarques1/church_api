@@ -1,0 +1,58 @@
+### BASE URL
+@baseUrl = http://localhost:3000/api/families
+
+### 1. Criar Família (Sucesso)
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "name": "Família Silva",
+  "phone": "(11) 99999-8888",
+  "address": "Rua das Flores, 123",
+  "receive_support": true
+}
+
+### 2. Criar Família (Dados Mínimos)
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "name": "Família Oliveira",
+  "receive_support": false
+}
+
+### 3. Tentativa com Nome Inválido (Erro)
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "name": "",
+  "receive_support": true
+}
+
+### 4. Tentativa com Telefone Longo Demais (Erro)
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "name": "Família Souza",
+  "phone": "119999988880000000000",
+  "receive_support": true
+}
+
+### 5. Tentativa sem Boolean no Suporte (Erro)
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "name": "Família Costa",
+  "receive_support": "sim" 
+}
+
+### 6. Listar Todas as Famílias
+GET {{baseUrl}}/
+Accept: application/json
+
+### 7. Buscar Família por ID (Substitua :id)
+GET {{baseUrl}}/1
+Accept: application/json
