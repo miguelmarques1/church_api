@@ -10,6 +10,6 @@ const memberController = new MemberController();
 Router.post('/', validation(CreateMemberInputDTO), memberController.store.bind(memberController));
 Router.get('/', memberController.index.bind(memberController));
 Router.get('/:id', memberController.show.bind(memberController));
-Router.put('/:id', authentification, validation(UpdateMemberInputDTO), memberController.update.bind(memberController));
+Router.put('/:id', validation(UpdateMemberInputDTO), memberController.update.bind(memberController));
 
 export { Router as memberRouter };

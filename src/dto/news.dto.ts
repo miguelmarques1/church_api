@@ -31,9 +31,9 @@ export class NewsOutputDTO {
         public id: number,
         public title: string,
         public content: string,
-        public publicationDate: Date,
+        public publication_date: Date,
         public author: MemberOutputDTO,
         public featured: boolean,
-        public featuredImage?: string,
+        public featured_image?: string,
     ) {}
 }

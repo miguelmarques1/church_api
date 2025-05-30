@@ -25,7 +25,7 @@ export class FamilyOutputDTO {
     public constructor(
         public id: number,
         public name: string,
-        public receiveSupport: boolean,
+        public receive_support: boolean,
         public phone?: string,
         public address?: string,
     ) {}

@@ -9,4 +9,4 @@ const newsController = new NewsController();
 Router.post('/', validation(CreateNewsInputDTO), newsController.store.bind(newsController));
 Router.get('/', newsController.index.bind(newsController));
 
-export { Router as devotionalRouter };
+export { Router as newsRouter };

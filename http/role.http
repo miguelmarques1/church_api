@@ -1,0 +1,6 @@
+### BASE URL
+@baseUrl = http://localhost:3000/api/roles
+
+### 6. Listar Todas as Famílias
+GET {{baseUrl}}/
+Accept: application/json

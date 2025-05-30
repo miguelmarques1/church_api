@@ -1,9 +1,9 @@
 import { IsArray, IsDate, IsEmail, IsEnum, IsInt, isInt, IsNumber, IsOptional, IsPositive, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Gender } from '../enum/Gender';
-import { Role } from '../enum/RoleType';
 import { FamilyOutputDTO } from './family.dto';
 import { MinistryOutputDTO } from './ministry.dto';
+import { RoleOutputDTO } from './role.dto';
 
 export class MemberMinistryDTO {
     @IsNumber({}, { 
@@ -33,13 +33,10 @@ export class CreateMemberInputDTO {
     })
     gender: string;
 
-    @IsString({ 
-        message: 'O cargo deve ser um texto válido' 
+    @IsInt({ 
+        message: 'O ID do cargo deve ser válido' 
     })
-    @IsEnum(Role, { 
-        message: `Cargo inválido. Opções válidas: ${Object.values(Role).join(', ')}` 
-    })
-    role: string;
+    role_id: number;
 
     @IsString({ 
         message: 'O telefone deve ser um texto válido' 
@@ -72,7 +69,7 @@ export class CreateMemberInputDTO {
     ministries?: MemberMinistryDTO[];
 }
 
-export class UpdateMemberInputDTO {
+export class UpdateMemberInputDTO extends CreateMemberInputDTO {
     @IsOptional()
     @IsInt({
         message: 'O ID deve ser um inteiro',
@@ -102,13 +99,10 @@ export class UpdateMemberInputDTO {
     })
     gender: string;
 
-    @IsString({ 
-        message: 'O cargo deve ser um texto válido' 
+    @IsInt({ 
+        message: 'O ID do cargo deve ser válido' 
     })
-    @IsEnum(Role, { 
-        message: `Cargo inválido. Opções válidas: ${Object.values(Role).join(', ')}` 
-    })
-    role: string;
+    role_id: number;
 
     @IsString({ 
         message: 'O telefone deve ser um texto válido' 
@@ -146,12 +140,12 @@ export class MemberOutputDTO {
         public id: number,
         public name: string,
         public phone: string,
-        public role: string,
+        public role: RoleOutputDTO,
         public gender: string,
         public family: FamilyOutputDTO,
         public email?: string,
         public birthdate?: Date,
-        public imageUrl?: string,
+        public image_url?: string,
         public ministries?: MinistryOutputDTO[],
     ) { }
 }

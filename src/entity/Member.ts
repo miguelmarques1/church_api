@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, OneToMany } from "typeorm"
 import { Gender } from "../enum/Gender"
-import { Role } from "../enum/RoleType";
 import { Family } from "./Family";
 import { Ministry } from "./Ministry";
 import { Devotional } from "./Devotional";
 import { News } from "./News";
+import { Role } from "./Role";
 
 @Entity()
 export class Member {
@@ -25,14 +25,13 @@ export class Member {
     })
     gender: Gender;
 
-    @Column({
-        type: "enum",
-        enum: Role,
-        default: Role.MEMBER
-    })
+    @ManyToOne(() => Role, role => role.members, { eager: true })
+    @JoinColumn({ name: 'role_id' })
     role: Role;
 
-    @Column()
+    @Column({
+        unique: true,
+    })
     phone: string;
 
     @Column({ nullable: true })

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Member } from "./Member";
+import { Role } from "./Role"; // Assuming you have a Role entity
 
 @Entity()
 export class Devotional {
@@ -10,22 +11,25 @@ export class Devotional {
     title: string;
 
     @Column('text')
-    text: string;
+    content: string;
+
+    @Column('text')
+    verseText: string;
+
+    @Column()
+    reference: string;
 
     @Column({ type: 'date' })
     publicationDate: Date;
+
+    @Column({ nullable: true })
+    imageUrl?: string;
 
     @ManyToOne(() => Member, (member) => member.devotionals)
     @JoinColumn({ name: 'author_id' })
     author: Member;
 
-    @Column({
-        type: 'enum',
-        enum: ['all', 'leaders'],
-        default: 'all'
-    })
-    targetAudience: string;
-
-    @Column()
-    referenceVerse: string;
+    @ManyToOne(() => Role, { nullable: true }) 
+    @JoinColumn({ name: 'target_role_id' })
+    targetRole?: Role;
 }

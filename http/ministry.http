@@ -1,0 +1,10 @@
+### BASE URL
+@baseUrl = http://localhost:3000/api/ministries
+
+### 6. Listar Todas as Famílias
+GET {{baseUrl}}/
+Accept: application/json
+
+### 7. Buscar Família por ID (Substitua :id)
+GET {{baseUrl}}/1
+Accept: application/json

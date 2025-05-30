@@ -1,6 +1,5 @@
-export enum Role {
+export enum RoleCredentials {
     LEADER = 'leader',
     PASTOR = 'pastor',
     MEMBER = 'member',
-    DEACON = 'deacon'
 }

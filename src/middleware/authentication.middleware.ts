@@ -16,14 +16,22 @@ export const authentification = (
   const header = req.headers.authorization;
   
   if (!header) {
-    res.status(401).send("Unauthorized");
+    res.status(401).send({
+      message: 'Unauthorized',
+      error: true,
+      data: null,
+    });
     return;
   }
   
   const token = header.split(" ")[1];
   
   if (!token) {
-    res.status(401).send("Unauthorized");
+    res.status(401).send({
+      message: 'Unauthorized',
+      error: true,
+      data: null,
+    });
     return;
   }
 
@@ -34,7 +42,11 @@ export const authentification = (
 
     next(); 
   } catch (err) {
-    res.status(401).send("Unauthorized" + err.message);
+    res.status(401).send({
+      message: 'Unauthorized' + err.message,
+      error: true,
+      data: null,
+    });
     return;
   }
 };

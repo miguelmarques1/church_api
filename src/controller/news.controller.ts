@@ -1,21 +1,23 @@
 import { CreateDevotionalInputDTO } from "../dto/devotional.dto";
+import { CreateNewsInputDTO } from "../dto/news.dto";
 import { DevotionalService, DevotionalServiceInterface } from "../service/devotional.service";
+import { NewsService, NewsServiceInterface } from "../service/news.service";
 import { BaseController } from "./base.controller";
 import { Request, Response } from "express";
 
 export class NewsController extends BaseController {
-    private devotionalService: DevotionalServiceInterface;
+    private newsService: NewsServiceInterface;
 
     public constructor() {
         super();
-        this.devotionalService = new DevotionalService();
+        this.newsService = new NewsService();
     }
     
     public async store(req: Request, res: Response) {
         try {
-            const input = req.body as CreateDevotionalInputDTO;
+            const input = req.body as CreateNewsInputDTO;
             
-            const output = await this.devotionalService.create(input);
+            const output = await this.newsService.create(input);
 
             return super.success(res, output, 201);
         } catch(e) {
@@ -25,7 +27,7 @@ export class NewsController extends BaseController {
 
     public async index(req: Request, res: Response) {
         try {
-            const output = await this.devotionalService.list();
+            const output = await this.newsService.list();
 
             return super.success(res, output);
         } catch(e) {

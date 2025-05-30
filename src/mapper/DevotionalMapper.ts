@@ -1,15 +1,17 @@
 import { CreateDevotionalInputDTO, DevotionalOutputDTO } from "../dto/devotional.dto";
 import { Devotional } from "../entity/Devotional";
 import { MemberMapper } from "./MemberMapper";
+import { RoleMapper } from "./RoleMapper";
 
 export class DevotionalMapper {
     static inputToEntity(input: CreateDevotionalInputDTO): Devotional {
         const devotional = new Devotional();
         devotional.title = input.title;
-        devotional.text = input.content;
-        devotional.publicationDate = input.publicationDate;
-        devotional.targetAudience = input.targetAudience;
-        devotional.referenceVerse = input.referenceVerse;
+        devotional.verseText = input.verse_text;
+        devotional.content = input.content;
+        devotional.reference = input.reference;
+        devotional.publicationDate = new Date();
+        devotional.imageUrl = input.image_url;
 
         return devotional;
     }
@@ -18,11 +20,13 @@ export class DevotionalMapper {
         return new DevotionalOutputDTO(
             entity.id,
             entity.title,
-            entity.text,
+            entity.verseText,
+            entity.content,
+            entity.reference,
             entity.publicationDate,
-            MemberMapper.entityToOutput(entity.author),
-            entity.targetAudience as 'all' | 'leaders',
-            entity.referenceVerse
+            entity.imageUrl,
+            entity.author ? MemberMapper.entityToOutput(entity.author) : undefined,
+            entity.targetRole ? RoleMapper.entityToOutput(entity.targetRole) : undefined,
         );
     }
 }

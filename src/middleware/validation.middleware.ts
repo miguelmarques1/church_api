@@ -11,7 +11,7 @@ export function validation(dtoClass: any) {
       const errorMessages = errors.flatMap(error => 
         Object.values(error.constraints || {})
       );
-      res.status(400).json({ errors: errorMessages });
+      res.status(400).json({ error: true, data: null, message: errorMessages.join(', ') });
       return;
     }
 

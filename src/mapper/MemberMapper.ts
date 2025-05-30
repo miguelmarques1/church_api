@@ -1,11 +1,11 @@
 import { CreateMemberInputDTO, MemberOutputDTO } from "../dto/member.dto";
 import { Member } from "../entity/Member";
 import { Gender } from "../enum/Gender";
-import { Role } from "../enum/RoleType";
 import { fromValue } from "../helpers/fromValue";
 import { generatePassword } from "../helpers/generatePassword";
 import { FamilyMapper } from "./FamilyMapper";
 import { MinistryMapper } from "./MinistryMapper";
+import { RoleMapper } from "./RoleMapper";
 
 
 export class MemberMapper {
@@ -14,7 +14,6 @@ export class MemberMapper {
         member.name = input.name;
         member.birthdate = input.birthdate;
         member.gender = fromValue(Gender, input.gender);
-        member.role = fromValue(Role, input.role);
         member.phone = input.phone;
         member.email = input.email;
         member.imageUrl = input.image_url;
@@ -28,7 +27,7 @@ export class MemberMapper {
             input.id,
             input.name,
             input.phone,
-            input.role,
+            RoleMapper.entityToOutput(input.role),
             input.gender,
             FamilyMapper.entityToOutput(input.family),
             input.email,

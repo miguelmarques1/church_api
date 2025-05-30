@@ -1,0 +1,11 @@
+### BASE URL
+@baseUrl = http://localhost:3000/api
+
+### Login with phone
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "phone": "(11) 99148-5038",
+  "password": "02230893Mig"
+}

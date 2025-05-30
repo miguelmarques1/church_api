@@ -10,7 +10,7 @@ Authorization: Bearer seu_token_aqui
   "name": "João Silva",
   "birthdate": "1990-05-15",
   "gender": "male",
-  "role": "member",
+  "role_id": 1,
   "phone": "11999998888",
   "email": "joao@exemplo.com",
   "image_url": "https://exemplo.com/fotos/joao.jpg",
