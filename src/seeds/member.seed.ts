@@ -17,12 +17,13 @@ export async function seedMember() {
 
   const role = await roleRepo.findOneByOrFail({ name: 'Administrador' });
   const family = await familyRepo.findOneByOrFail({ name: 'Geração Eleita' });
+  const password = encrypt.encryptpass("admin123");
 
   const member = memberRepo.create({
     name: 'Administrador do Sistema',
     phone: '11999999999',
     gender: Gender.MALE,
-    password: 'senha_hash_aqui',
+    password: password,
     role,
     family,
     email: 'admin@sistema.com',
