@@ -1,13 +1,13 @@
-import { AppDataSource } from "../data-source"
-import { seedRoles } from "./role.seed"
-import { seedAdminMember } from "./member.seed"
+import { AppDataSource } from "../data-source";
+import { seedRoles } from "./role.seed";
+import { seedFamily } from "./family.seed";
+import { seedMember } from "./member.seed";
 
 AppDataSource.initialize().then(async () => {
-  await seedRoles()
-  await seedAdminMember()
-  console.log("Seeding completo!")
-  process.exit(0)
+  await seedRoles();
+  await seedFamily();
+  await seedMember();
+  await AppDataSource.destroy();
 }).catch((err) => {
-  console.error("Erro ao executar seed:", err)
-  process.exit(1)
-})
+  console.error("Erro ao executar seeds:", err);
+});

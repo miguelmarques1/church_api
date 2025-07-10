@@ -61,6 +61,6 @@ Accept: application/json
 ### 8. Pegar as minhas informações
 GET {{baseUrl}}/me
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InBhc3RvciIsImlhdCI6MTc0OTc2MjA0Nn0.ReSq6Oh1F1U3-h3moggNvKF1xb95aOO3bnJOF14Hpg4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsInJvbGUiOiJwYXN0b3IiLCJpYXQiOjE3NTIxNjgyMDV9.IkuvxXFiTqCTii5xKV4uQU8N-7YY-HUtHlN2Bj0IT-w
 
 {}

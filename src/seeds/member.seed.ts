@@ -1,30 +1,33 @@
-import { AppDataSource } from "../data-source"
-import { Member } from "../entity/Member"
-import { Role } from "../entity/Role"
-import { Gender } from "../enum/Gender"
-import { encrypt } from "../helpers/encrypt"
+import { AppDataSource } from "../data-source";
+import { Family } from "../entity/Family";
+import { Member } from "../entity/Member";
+import { Role } from "../entity/Role";
+import { Gender } from "../enum/Gender";
 
-export async function seedAdminMember() {
-  const memberRepo = AppDataSource.getRepository(Member)
-  const roleRepo = AppDataSource.getRepository(Role)
+export async function seedMember() {
+  const memberRepo = AppDataSource.getRepository(Member);
+  const roleRepo = AppDataSource.getRepository(Role);
+  const familyRepo = AppDataSource.getRepository(Family);
 
-  const existing = await memberRepo.findOneBy({ phone: "11999999999" })
-  if (existing) return console.log("Admin já existe")
+  const existing = await memberRepo.findOneBy({ phone: '11999999999' });
+  if (existing) {
+    console.log("⚠️ Membro já existe");
+    return;
+  }
 
-  const adminRole = await roleRepo.findOneBy({ name: "Administrador" })
-  if (!adminRole) throw new Error("Role 'Administrador' não encontrada")
+  const role = await roleRepo.findOneByOrFail({ name: 'Administrador' });
+  const family = await familyRepo.findOneByOrFail({ name: 'Geração Eleita' });
 
-  const password = encrypt.encryptpass("admin123")
-
-  const admin = memberRepo.create({
-    name: "Administrador",
-    phone: "11999999999",
-    email: "admin@sistema.com",
+  const member = memberRepo.create({
+    name: 'Administrador do Sistema',
+    phone: '11999999999',
     gender: Gender.MALE,
-    password,
-    role: adminRole
-  })
+    password: 'senha_hash_aqui',
+    role,
+    family,
+    email: 'admin@sistema.com',
+  });
 
-  await memberRepo.save(admin)
-  console.log("Administrador criado com sucesso")
+  await memberRepo.save(member);
+  console.log("✅ Membro administrador seeded");
 }
