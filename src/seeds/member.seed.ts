@@ -3,6 +3,7 @@ import { Family } from "../entity/Family";
 import { Member } from "../entity/Member";
 import { Role } from "../entity/Role";
 import { Gender } from "../enum/Gender";
+import { encrypt } from "../helpers/encrypt"
 
 export async function seedMember() {
   const memberRepo = AppDataSource.getRepository(Member);
