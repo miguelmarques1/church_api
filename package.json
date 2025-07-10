@@ -30,6 +30,7 @@
    "scripts": {
       "watch": "tsc -w",
       "dev": "nodemon src/index.ts",
+      "seed": "ts-node src/seeds/seed.ts",
       "start:dev": "concurrently \"tsc -w\" \"nodemon build/index.js\"",
       "build": "tsc",
       "start": "ts-node src/index.ts",
