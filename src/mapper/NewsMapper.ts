@@ -7,9 +7,9 @@ export class NewsMapper {
         const news = new News();
         news.title = input.title;
         news.content = input.content;
-        news.publicationDate = input.publicationDate;
+        news.publicationDate = input.publication_date;
         news.featured = input.featured ?? false;
-        news.featuredImage = input.featuredImage;
+        news.featuredImage = input.featured_image;
         return news;
     }
 

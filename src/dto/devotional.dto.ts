@@ -32,6 +32,36 @@ export class CreateDevotionalInputDTO {
     target_role_id?: number;
 }
 
+export class UpdateDevotionalInputDTO  extends CreateDevotionalInputDTO {
+    @IsNotEmpty({ message: 'Title is required' })
+    @IsString({ message: 'Title must be a string' })
+    title: string;
+
+    @IsNotEmpty({ message: 'Verse text is required' })
+    @IsString({ message: 'Verse text must be a string' })
+    verse_text: string;
+
+    @IsNotEmpty({ message: 'Content is required' })
+    @IsString({ message: 'Content must be a string' })
+    content: string;
+
+    @IsNotEmpty({ message: 'Bible reference is required' })
+    @IsString({ message: 'Bible reference must be a string' })
+    reference: string;
+
+    @IsOptional()
+    @IsString({ message: 'Image URL must be a string' })
+    image_url?: string;
+
+    @IsOptional()
+    @IsInt({ message: 'Target role ID must be a valid number' })
+    target_role_id?: number;
+
+    @IsOptional()
+    @IsInt({ message: 'Author ID must be a valid number' })
+    author_id: number;
+}
+
 export class DevotionalOutputDTO {
     public constructor(
         public id: number,

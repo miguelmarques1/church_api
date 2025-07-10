@@ -6,6 +6,6 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-  "phone": "(11) 99148-5038",
+  "phone": "11991485038",
   "password": "02230893Mig"
 }

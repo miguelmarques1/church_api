@@ -3,7 +3,7 @@ import { AppDataSource } from "../data-source";
 import { Devotional } from "../entity/Devotional";
 import { Member } from "../entity/Member";
 import { DevotionalMapper } from "../mapper/DevotionalMapper";
-import { CreateDevotionalInputDTO, DevotionalOutputDTO } from "../dto/devotional.dto";
+import { CreateDevotionalInputDTO, DevotionalOutputDTO, UpdateDevotionalInputDTO } from "../dto/devotional.dto";
 import { NotFoundException } from "../exception/NotFoundException";
 import { Role } from "../entity/Role";
 
@@ -11,6 +11,7 @@ export interface DevotionalServiceInterface {
     create(input: CreateDevotionalInputDTO): Promise<DevotionalOutputDTO>;
     find(id: number): Promise<DevotionalOutputDTO>;
     list(): Promise<DevotionalOutputDTO[]>;
+    update(id: number, input: UpdateDevotionalInputDTO): Promise<DevotionalOutputDTO>;
 }
 
 export class DevotionalService implements DevotionalServiceInterface {
@@ -22,6 +23,28 @@ export class DevotionalService implements DevotionalServiceInterface {
         this.devotionalRepository = AppDataSource.getRepository(Devotional);
         this.memberRepository = AppDataSource.getRepository(Member);
         this.roleRepository = AppDataSource.getRepository(Role);
+    }
+    
+    async update(id: number, input: UpdateDevotionalInputDTO): Promise<DevotionalOutputDTO> {
+        const devotional = await this.devotionalRepository.findOne({
+            where: {
+                id: id,
+            },
+        });
+
+        if(!devotional) {
+            throw new NotFoundException('Devocional não encontrado');
+        }
+
+        devotional.title = input.title;
+        devotional.verseText = input.verse_text;
+        devotional.content = input.content;
+        devotional.reference = input.reference;
+        devotional.imageUrl = input.image_url;
+        
+        await this.syncRelations(input, devotional);
+        const result = await this.devotionalRepository.save(devotional);
+        return DevotionalMapper.entityToOutput(result);
     }
 
     async create(input: CreateDevotionalInputDTO): Promise<DevotionalOutputDTO> {

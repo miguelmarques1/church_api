@@ -17,9 +17,9 @@ export class RoleService implements RoleServiceInterface {
 
 
     async list(): Promise<RoleOutputDTO[]> {
-        const devotionals = await this.roleRepository.find();
+        const roles = await this.roleRepository.find();
 
-        return devotionals.map(RoleMapper.entityToOutput);
+        return roles.map(RoleMapper.entityToOutput);
     }
 
 }

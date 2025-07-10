@@ -1,4 +1,4 @@
-import { CreateDevotionalInputDTO } from "../dto/devotional.dto";
+import { CreateDevotionalInputDTO, UpdateDevotionalInputDTO } from "../dto/devotional.dto";
 import { DevotionalService, DevotionalServiceInterface } from "../service/devotional.service";
 import { BaseController } from "./base.controller";
 import { Request, Response } from "express";
@@ -40,6 +40,21 @@ export class DevotionalController extends BaseController {
     public async index(req: Request, res: Response) {
         try {
             const output = await this.devotionalService.list();
+
+            return super.success(res, output);
+        } catch(e) {
+            return super.error(res, e);
+        }
+    }
+
+    public async update(req: Request, res: Response) {
+        try {
+            const id = Number.parseInt(req.params.id);
+            const authorId = req['member_id'] as number;
+            const input = req.body as UpdateDevotionalInputDTO;
+            input.author_id = authorId;
+
+            const output = await this.devotionalService.update(id, input);
 
             return super.success(res, output);
         } catch(e) {

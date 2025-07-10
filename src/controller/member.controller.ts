@@ -11,6 +11,18 @@ export class MemberController extends BaseController {
         this.memberService = new MemberService();
     }
 
+    public async me(req: Request, res: Response) {
+        try {
+            const id = req['member_id'] as number;
+            
+            const output = await this.memberService.me(id);
+
+            return super.success(res, output);
+        } catch (e) {
+            return super.error(res, e);
+        }
+    }
+
     public async store(req: Request, res: Response) {
         try {
             const input = req.body as CreateMemberInputDTO;

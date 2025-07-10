@@ -57,3 +57,10 @@ Accept: application/json
 ### 7. Tentativa Buscar Membro Inexistente
 GET {{baseUrl}}/9999
 Accept: application/json
+
+### 8. Pegar as minhas informações
+GET {{baseUrl}}/me
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InBhc3RvciIsImlhdCI6MTc0OTc2MjA0Nn0.ReSq6Oh1F1U3-h3moggNvKF1xb95aOO3bnJOF14Hpg4
+
+{}

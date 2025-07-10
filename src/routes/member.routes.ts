@@ -9,6 +9,7 @@ const memberController = new MemberController();
 
 Router.post('/', validation(CreateMemberInputDTO), memberController.store.bind(memberController));
 Router.get('/', memberController.index.bind(memberController));
+Router.get('/me', authentification, memberController.me.bind(memberController));
 Router.get('/:id', memberController.show.bind(memberController));
 Router.put('/:id', validation(UpdateMemberInputDTO), memberController.update.bind(memberController));
 

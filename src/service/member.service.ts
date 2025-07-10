@@ -11,6 +11,7 @@ import { Gender } from "../enum/Gender";
 import { Role } from "../entity/Role";
 
 export interface MemberServiceInterface {
+    me(id: number): Promise<MemberOutputDTO>;
     create(input: CreateMemberInputDTO): Promise<MemberOutputDTO>;
     list(query?: string): Promise<MemberOutputDTO[]>;
     find(id: number): Promise<MemberOutputDTO>;
@@ -27,6 +28,24 @@ export class MemberService implements MemberServiceInterface {
         this.memberRepository = AppDataSource.getRepository(Member);
         this.familyRepository = AppDataSource.getRepository(Family);
         this.ministryRepository = AppDataSource.getRepository(Ministry);
+        this.roleRepository = AppDataSource.getRepository(Role);
+    }
+
+    async me(id: number): Promise<MemberOutputDTO> {
+        const member = await this.memberRepository.findOne({
+            where: { id: id },
+            relations: {
+                family: true,
+                ministries: true,
+                role: true,
+            }
+        });
+
+        if (!member) {
+            throw new NotFoundException('Token inválido ou membro não encontrado');
+        }
+
+        return MemberMapper.entityToOutput(member);
     }
 
     async update(id: number, input: UpdateMemberInputDTO): Promise<MemberOutputDTO> {
