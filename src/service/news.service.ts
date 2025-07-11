@@ -28,7 +28,10 @@ export class NewsService implements NewsServiceInterface {
                 id: id,
             },
             relations: {
-                author: true,
+                author: {
+                    role: true,
+                    family: true,
+                },
             },
         });
         if (!news) {
@@ -65,13 +68,16 @@ export class NewsService implements NewsServiceInterface {
 
         const result = await this.newsRepository.save(news);
 
-        return NewsMapper.entityToOutput(result);
+        return this.find(result.id);
     }
 
     async list(): Promise<NewsOutputDTO[]> {
         const devotionals = await this.newsRepository.find({
             relations: {
-                author: true,
+                author: {
+                    role: true,
+                    family: true,
+                },
             },
         });
 

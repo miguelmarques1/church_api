@@ -40,7 +40,7 @@ export class EventController extends BaseController {
 
             const startDate = start ? new Date(start as string) : undefined;
             const endDate = end ? new Date(end as string) : undefined;
-
+            console.log("Start date:", startDate, "End date:", endDate);
             if (startDate && isNaN(startDate.getTime())) {
                 return super.error(res, { message: 'Data inicial inválida' }, 400);
             }

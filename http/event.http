@@ -4,7 +4,7 @@
 
 ### Listar todos os eventos (GET /events)
 ### Com filtros opcionais: start, end, published, page, limit
-GET {{baseUrl}}/events?start=2023-12-01&end=2023-12-31&published=true&page=1&limit=10 HTTP/1.1
+GET {{baseUrl}}/events?start=2025-07-01&end=2025-07-31&published=true&page=1&limit=10 HTTP/1.1
 Content-Type: {{contentType}}
 
 ### Buscar eventos futuros

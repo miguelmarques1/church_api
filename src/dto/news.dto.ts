@@ -11,7 +11,6 @@ export class CreateNewsInputDTO {
     content: string;
 
     @IsNotEmpty({ message: 'Publication date is required' })
-    @IsDate({ message: 'Invalid date format' })
     publication_date: Date;
 
     @IsNotEmpty({ message: 'Author ID is required' })

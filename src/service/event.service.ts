@@ -58,7 +58,8 @@ export class EventService implements EventServiceInterface {
     }
 
     async list(startAt?: Date, endAt?: Date): Promise<EventOutputDTO[]> {
-        // 1. Busca todos os eventos (incluindo recorrentes)
+        console.log("Fetching events with startAt:", startAt, "endAt:", endAt);
+        
         const allEvents = await this.eventRepository.find({
             relations: {
                 organizer: {
@@ -181,7 +182,7 @@ export class EventService implements EventServiceInterface {
         if (!event.recurrencePattern || !event.endDate) return [event];
 
         const occurrences: Event[] = [];
-        let currentDate = startAt ?? new Date(event.date);
+        let currentDate = new Date(startAt ?? event.date);
         const endRecurrenceDate = endAt ?? new Date(event.endDate);
 
         const eventDuration = event.endDate.getTime() - event.date.getTime();
